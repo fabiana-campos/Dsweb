@@ -1,0 +1,28 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>App Enquetes</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/enquetes/css/style.css' %}"/>
+    </head>
+    <body>
+        <h1>Aplicação de Enquetes - DSWEB 2024.1</h1>
+        <h2>PARCIAL da Enquete #{{ enquete.id }}</h2>
+        <h2>{{ enquete.texto}}</h2>
+        <p><i>{{ enquete.pub_date}}</i></p>
+        <p>Quantidade de votos por alternativas:</p>
+        <ul>
+        {% for alt in enquete.alternativa_set.all %}
+            <li>
+                {{ alt.texto }} == {{ alt.quant_votos }}
+                voto{{ alt.quant_votos | pluralize }}
+            </li>
+        {% endfor %}
+        </ul>
+        <hr>
+        <a href="{% url 'enquetes:detalhes' enquete.id %}">Votar novamente</a> |
+        <a href="{% url 'enquetes:index' %}">Voltar</a>
+        <br>
+        <a href="{% url 'raiz:index' %}">Inicio</a>
+    </body>
+</html>

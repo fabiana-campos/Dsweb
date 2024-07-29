@@ -1,0 +1,26 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>App Enquetes</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/enquetes/css/style.css' %}"/>
+    </head>
+    <body>
+        <h1>Aplicação de Enquetes - DSWeb 2024.1</h1>
+        {% if lista_enquetes %}
+            <h3>Lista das Enquetes Cadastradas:</h3>
+            <ul>
+                {% for p in lista_enquetes %}
+                    <li>
+                    <a href="{% url 'enquetes:detalhes' p.id %}">
+                        {{ p.texto }}
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'enquetes:resultado' p.id %}"> (ver parcial)</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>Nenhuma enquete cadastrada até o momento!</h3>
+        {% endif %}
+    </body>
+</html>
